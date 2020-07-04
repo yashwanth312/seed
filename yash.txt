@@ -1,0 +1,5 @@
+job("sleep job"){
+	steps{
+                             shell('sleep 60')
+                   }
+}
