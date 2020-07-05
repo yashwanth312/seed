@@ -45,7 +45,7 @@ job('job_2'){
 }
 
 
-job(job_3){
+job('job_3'){
                     triggers {
                                   upstream('job_2', 'SUCCESS')
                             }
@@ -63,7 +63,7 @@ fi''')
 }
 
 
-job(job_4){
+job('job_4'){
                     scm{
                               github('yashwanth312/devtsk3-update', 'master')
                        }
