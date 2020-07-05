@@ -1,7 +1,7 @@
 job("job_1"){
              	
               scm {
-                               github('yashwanth312/seed', 'master')
+                               github('yashwanth312/groovytsk1', 'master')
                        }
               triggers {
                                   upstream('seed', 'SUCCESS')
@@ -19,9 +19,7 @@ job("job_1"){
 
 
 job('job_2'){
-                   scm{
-                             github('yashwanth312/groovytsk1', 'master')
-                          }
+                   
 	 triggers {
                                   upstream('job_1', 'SUCCESS')
                             }
