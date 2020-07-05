@@ -26,20 +26,20 @@ job('job_2'){
                    steps{
                             shell(''' if sudo ls /code/ | grep .php
                                       then
-                                      kubectl create -f /devtsk3.yml
-                                      podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
+                                      sudo kubectl create -f /devtsk3.yml
+                                      podname=$(sudo kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
                                       sleep 60
-                                      kubectl cp /code/*.php $podname:/var/www/html/
-                                      kubectl expose deploy deploy-task3 --port=80 --type=NodePort
+                                      sudo kubectl cp /code/*.php $podname:/var/www/html/
+                                      sudo kubectl expose deploy deploy-task3 --port=80 --type=NodePort
                                       fi
 
                                       if sudo ls /code/ | grep .html
                                       then
-                                      kubectl create -f /devtsk3.2.yml
-                                      podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
+                                      sudo kubectl create -f /devtsk3.2.yml
+                                      podname=$(sudo kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
                                       sleep 60
-                                      kubectl cp /code/*.html $podname:/usr/local/apache2/htdocs/
-                                      kubectl expose deploy deploy-task3 --port=80 --type=NodePort
+                                      sudo kubectl cp /code/*.html $podname:/usr/local/apache2/htdocs/
+                                      sudo kubectl expose deploy deploy-task3 --port=80 --type=NodePort
                                       fi''')
      }
 }
@@ -67,17 +67,15 @@ job('job_4'){
                     scm{
                               github('yashwanth312/devtsk3-update', 'master')
                        }
-                    triggers {
-                                  upstream('job_3', 'SUCCESS')
-                            }
+                    
                     steps{
-                               shell(''' cp -rvf * /code/
-podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
-if  kubectl get deploy -o json | jq .items[0].spec.template.spec.containers[].image | grep httpd
+                               shell(''' sudo cp -rvf * /code/
+podname=$(sudo kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
+if  sudo kubectl get deploy -o json | jq .items[0].spec.template.spec.containers[].image | grep httpd
 then
-kubectl cp /code/* $podname:/usr/local/apache2/httpd/ 
+sudo kubectl cp /code/* $podname:/usr/local/apache2/httpd/ 
 else
-kubectl cp /code/* $podname:/var/www/html/
+sudo kubectl cp /code/* $podname:/var/www/html/
 fi''')
     }
 }
