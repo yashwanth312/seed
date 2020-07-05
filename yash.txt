@@ -13,7 +13,7 @@ job("job_1"){
                                          else
                                          mkdir /code
                                          cp -rvf * /code
-                                         fi
+                                         fi''')
                    }
 }
 
@@ -25,22 +25,22 @@ job('job_2'){
                             }
                    steps{
                             shell(''' if sudo ls /code/ | grep .php
-then
-kubectl create -f /devtsk3.yml
-podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
-sleep 60
-kubectl cp /code/*.php $podname:/var/www/html/
-kubectl expose deploy deploy-task3 --port=80 --type=NodePort
-fi
+                                      then
+                                      kubectl create -f /devtsk3.yml
+                                      podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
+                                      sleep 60
+                                      kubectl cp /code/*.php $podname:/var/www/html/
+                                      kubectl expose deploy deploy-task3 --port=80 --type=NodePort
+                                      fi
 
-if sudo ls /code/ | grep .html
-then
-kubectl create -f /devtsk3.2.yml
-podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
-sleep 60
-kubectl cp /code/*.html $podname:/usr/local/apache2/htdocs/
-kubectl expose deploy deploy-task3 --port=80 --type=NodePort
-fi''')
+                                      if sudo ls /code/ | grep .html
+                                      then
+                                      kubectl create -f /devtsk3.2.yml
+                                      podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
+                                      sleep 60
+                                      kubectl cp /code/*.html $podname:/usr/local/apache2/htdocs/
+                                      kubectl expose deploy deploy-task3 --port=80 --type=NodePort
+                                      fi''')
      }
 }
 
