@@ -24,7 +24,7 @@ job('job_2'){
                                   upstream('job_1', 'SUCCESS')
                             }
                    steps{
-                            shell('''if sudo ls /code/ | grep .php
+                            shell(''' if sudo ls /code/ | grep .php
 then
 kubectl create -f /devtsk3.yml
 podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
@@ -50,7 +50,7 @@ job(job_3){
                                   upstream('job_2', 'SUCCESS')
                             }
                      steps{
-                                shell('''port=$(kubectl get -o json service | jq .items[0].spec.ports[].nodePort)
+                                shell(''' port=$(kubectl get -o json service | jq .items[0].spec.ports[].nodePort)
 
 export status=$(curl -s -i -w "%{http_code}" -o /dev/null 192.168.99.100:$port)
 if [ $status==200 ]
@@ -71,7 +71,7 @@ job(job_4){
                                   upstream('job_3', 'SUCCESS')
                             }
                     steps{
-                               shell('''cp -rvf * /code/
+                               shell(''' cp -rvf * /code/
 podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
 if  kubectl get deploy -o json | jq .items[0].spec.template.spec.containers[].image | grep httpd
 then
