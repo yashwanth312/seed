@@ -61,14 +61,10 @@ exit 1
 fi''')
     }
     
-   publishers{
-            extendedEmail {
-                     recipientList('yashwanthsaikrishna@gmail.com')
-                     defaultSubject('JOB_3 Error')
-                     defaultContent('Failure in deployment')
-                     contentType('text/html')
-        }
-   }
+  mailer {
+          recipients('yashwanthsaikrishna@gmail.com') 
+          notifyEveryUnstableBuild(True) 
+  }
 }
 
 
