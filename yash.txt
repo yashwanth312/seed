@@ -70,14 +70,15 @@ fi''')
 	  sendToIndividuals(true)
         }
       }
-    }
-  }
-condition {
+  condition {
            alwaysRun()
 	   }
 runner {
         fail()
 	}
+    }
+  }
+
 }
 
 job('job_4'){
