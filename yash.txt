@@ -79,3 +79,14 @@ kubectl cp /code/* $podname:/var/www/html/
 fi''')
     }
 }
+
+buildPipelineView('project-tsk6') {
+    filterBuildQueue()
+    filterExecutors()
+    title('Project tsk6 CI Pipeline')
+    displayedBuilds(3)
+    selectedJob('job_1')
+    alwaysAllowManualTrigger()
+    showPipelineParameters()
+    refreshFrequency(10)
+}
