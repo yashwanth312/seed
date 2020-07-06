@@ -67,6 +67,7 @@ fi''')
   mailer {
           recipients('yashwanthsaikrishna@gmail.com') 
           notifyEveryUnstableBuild(true) 
+	  sendToIndividuals(true)
         }
       }
     }
