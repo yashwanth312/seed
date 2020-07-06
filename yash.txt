@@ -24,22 +24,22 @@ job('job_2'){
                                   upstream('job_1', 'SUCCESS')
                             }
                    steps{
-                            shell(''' if sudo ls /code/ | grep .php
+                            shell(''' if ls /code/ | grep .php
                                       then
-                                      sudo kubectl create -f /devtsk3.yml
-                                      podname=$(sudo kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
+                                      kubectl create -f /devtsk3.yml
+                                      podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
                                       sleep 60
-                                      sudo kubectl cp /code/*.php $podname:/var/www/html/
-                                      sudo kubectl expose deploy deploy-task3 --port=80 --type=NodePort
+                                      kubectl cp /code/*.php $podname:/var/www/html/
+                                      kubectl expose deploy deploy-task3 --port=80 --type=NodePort
                                       fi
 
-                                      if sudo ls /code/ | grep .html
+                                      if ls /code/ | grep .html
                                       then
-                                      sudo kubectl create -f /devtsk3.2.yml
-                                      podname=$(sudo kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
+                                      kubectl create -f /devtsk3.2.yml
+                                      podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
                                       sleep 60
-                                      sudo kubectl cp /code/*.html $podname:/usr/local/apache2/htdocs/
-                                      sudo kubectl expose deploy deploy-task3 --port=80 --type=NodePort
+                                      kubectl cp /code/*.html $podname:/usr/local/apache2/htdocs/
+                                      kubectl expose deploy deploy-task3 --port=80 --type=NodePort
                                       fi''')
      }
 }
@@ -69,13 +69,13 @@ job('job_4'){
                        }
                     
                     steps{
-                               shell(''' sudo cp -rvf * /code/
-podname=$(sudo kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
-if  sudo kubectl get deploy -o json | jq .items[0].spec.template.spec.containers[].image | grep httpd
+                               shell('''cp -rvf * /code/
+podname=$(kubectl get pods -o=jsonpath='{.items[0].metadata.name}')
+if  kubectl get deploy -o json | jq .items[0].spec.template.spec.containers[].image | grep httpd
 then
-sudo kubectl cp /code/* $podname:/usr/local/apache2/httpd/ 
+kubectl cp /code/* $podname:/usr/local/apache2/httpd/ 
 else
-sudo kubectl cp /code/* $podname:/var/www/html/
+kubectl cp /code/* $podname:/var/www/html/
 fi''')
     }
 }
