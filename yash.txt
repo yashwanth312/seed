@@ -66,6 +66,7 @@ fi''')
             defaultSubject('JOB_3 Error')
             defaultContent('Failure in deployment')
             contentType('text/html')
+   }
 }
 
 
