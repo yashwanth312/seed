@@ -72,6 +72,12 @@ fi''')
       }
     }
   }
+condition {
+           alwaysRun()
+	   }
+runner {
+        fail()
+	}
 }
 
 job('job_4'){
