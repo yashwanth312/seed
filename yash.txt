@@ -80,13 +80,17 @@ fi''')
     }
 }
 
-buildPipelineView('project-tsk6') {
-    filterBuildQueue()
-    filterExecutors()
-    title('Project tsk6 CI Pipeline')
-    displayedBuilds(3)
-    selectedJob('job_1')
-    alwaysAllowManualTrigger()
-    showPipelineParameters()
-    refreshFrequency(10)
+deliveryPipelineView('project-tsk6') {
+    pipelineInstances(3)
+    showAggregatedPipeline()
+    columns(1)
+    sorting(Sorting.TITLE)
+    updateInterval(10)
+    enableManualTriggers()
+    showAvatars()
+    showChangeLog()
+    pipelines {
+        component('Sub System A', 'job_1')
+        
+    }
 }
