@@ -84,9 +84,9 @@ buildPipelineView('project-tsk6') {
     filterBuildQueue()
     filterExecutors()
     title('Project tsk6 CI Pipeline')
-    displayedBuilds(5)
+    displayedBuilds(3)
     selectedJob('job_1')
     alwaysAllowManualTrigger()
     showPipelineParameters()
-    refreshFrequency(60)
+    refreshFrequency(10)
 }
