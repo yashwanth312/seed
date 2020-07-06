@@ -60,10 +60,11 @@ else
 exit 1
 fi''')
     }
-    
+ buildStep {   
   mailer {
           recipients('yashwanthsaikrishna@gmail.com') 
           notifyEveryUnstableBuild(True) 
+      }
   }
 }
 
