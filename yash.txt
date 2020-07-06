@@ -60,11 +60,14 @@ else
 exit 1
 fi''')
     }
+ 
+ singleConditionalBuilder {
  buildStep {   
   mailer {
           recipients('yashwanthsaikrishna@gmail.com') 
           notifyEveryUnstableBuild(True) 
       }
+    }
   }
 }
 
