@@ -61,16 +61,17 @@ exit 1
 fi''')
     }
  
+ steps{
  singleConditionalBuilder {
  buildStep {   
   mailer {
           recipients('yashwanthsaikrishna@gmail.com') 
           notifyEveryUnstableBuild(True) 
+        }
       }
     }
   }
 }
-
 
 job('job_4'){
                     scm{
