@@ -57,28 +57,10 @@ if [ $status==200 ]
 then
 exit 0
 else 
+sudo python3.6 /mail.py
 exit 1
 fi''')
     }
- 
- steps{
- singleConditionalBuilder {
- buildStep {   
-  mailer {
-          recipients('yashwanthsaikrishna@gmail.com') 
-          notifyEveryUnstableBuild(true) 
-	  sendToIndividuals(true)
-        }
-      }
-  condition {
-           alwaysRun()
-	   }
-runner {
-        fail()
-	}
-    }
-  }
-
 }
 
 job('job_4'){
