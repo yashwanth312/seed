@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: yash-httpd
+spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+        requests:
+            storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: yash
+spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+        requests:
+            storage: 2Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: deploy-task3
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       env: deploy
+  template:
+    metadata:
+     name: myweb-pod
+     labels:
+       env: deploy
+    spec: 
+      containers:
+        - name: web1
+          image: vimal13/apache-webserver-php
+          volumeMounts:
+            - name: logs
+              mountPath: /etc/httpd/logs/
+          volumeMounts:
+            - name: webdata
+              mountPath: /var/www/html  
+      volumes:
+      - name: logs
+        persistentVolumeClaim:
+            claimName: yash
+      - name: webdata
+        persistentVolumeClaim:
+            claimName: yash-httpd	
